@@ -1,0 +1,23 @@
+{
+  "name": "@k-renwick/colour-mixer",
+  "version": "0.0.1",
+  "description": "A collection of methods to manipulate colours",
+  "main": "Colour.js",
+  "author": "Katrina Renwick",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k-renwick/colour-mixer"
+  },
+  "license": "ISC",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "babel-jest": "^25.1.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6"
+  }
+}
