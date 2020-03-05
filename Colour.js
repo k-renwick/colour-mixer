@@ -3,7 +3,7 @@
  * @param {string} colour
  * @returns {boolean} returns true is passed string is a valid hex colour code, false otherwise
  */
-export function isHexCode(colour = '') {
+export function isValidHex(colour = '') {
   return /^#?([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3,4})$/g.test(colour.toString())
 }
 
@@ -12,7 +12,7 @@ export function isHexCode(colour = '') {
  * @param {string} colour
  * @returns {boolean} returns true is passed string is a valid rgb or rgba colour code, false otherwise
  */
-export function isRgbCode(colour = '') {
+export function isValidRgb(colour = '') {
   colour.toString()
   const isRgb = /^rgb\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)$/g.test(colour)
   const isRgba = /^rgba\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3}), ?(1|0|0\.[0-9]+)\)$/g.test(colour)
@@ -27,7 +27,7 @@ export function isRgbCode(colour = '') {
  * @returns {string} Hex colour code
  */
 export function asHex(r, g, b) {
-  return isRgbCode(`rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`) &&
+  return isValidRgb(`rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`) &&
     `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).substr(0, 6).toUpperCase()}`
 }
 

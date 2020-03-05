@@ -1,6 +1,6 @@
 import {
-  isHexCode,
-  isRgbCode,
+  isValidHex,
+  isValidRgb,
   asHex,
   asRgb,
   asRgbArray,
@@ -9,58 +9,58 @@ import {
 
 //import * as colourMixer from './Colour'
 
-describe('isHexCode', () => {
+describe('isValidHex', () => {
   it('returns false when given a non-string', () => {
-    expect(isHexCode(false)).toBe(false)
-    expect(isHexCode(undefined)).toBe(false)
-    expect(isHexCode(1)).toBe(false)
-    expect(isHexCode({ random: 'object' })).toBe(false)
+    expect(isValidHex(false)).toBe(false)
+    expect(isValidHex(undefined)).toBe(false)
+    expect(isValidHex(1)).toBe(false)
+    expect(isValidHex({ random: 'object' })).toBe(false)
   })
   it('returns false when given invalid hex codes', () => {
-    expect(isHexCode('#123456789')).toBe(false)
-    expect(isHexCode('123456789')).toBe(false)
-    expect(isHexCode('#FFFFFG')).toBe(false)
+    expect(isValidHex('#123456789')).toBe(false)
+    expect(isValidHex('123456789')).toBe(false)
+    expect(isValidHex('#FFFFFG')).toBe(false)
   })
   it('returns true when given valid hex codes', () => {
-    expect(isHexCode('#FFFFFF')).toBe(true)
-    expect(isHexCode('FFFFFF')).toBe(true)
-    expect(isHexCode('FFFFFFFF')).toBe(true)
-    expect(isHexCode('FFF')).toBe(true)
-    expect(isHexCode('#FFF')).toBe(true)
+    expect(isValidHex('#FFFFFF')).toBe(true)
+    expect(isValidHex('FFFFFF')).toBe(true)
+    expect(isValidHex('FFFFFFFF')).toBe(true)
+    expect(isValidHex('FFF')).toBe(true)
+    expect(isValidHex('#FFF')).toBe(true)
   })
 })
 
-describe('isRgbCode', () => {
+describe('isValidRgb', () => {
   it('returns false when given a non-string', () => {
-    expect(isRgbCode(false)).toBe(false)
-    expect(isRgbCode(undefined)).toBe(false)
-    expect(isRgbCode(1)).toBe(false)
-    expect(isRgbCode({ random: 'object' })).toBe(false)
+    expect(isValidRgb(false)).toBe(false)
+    expect(isValidRgb(undefined)).toBe(false)
+    expect(isValidRgb(1)).toBe(false)
+    expect(isValidRgb({ random: 'object' })).toBe(false)
   })
   it('returns false when given invalid rbg codes', () => {
-    expect(isRgbCode('rgb(w,w,w)')).toBe(false)
-    expect(isRgbCode('rgb(200,200,200,1)')).toBe(false)
-    expect(isRgbCode('rgb(1000,1000,1000)')).toBe(false)
+    expect(isValidRgb('rgb(w,w,w)')).toBe(false)
+    expect(isValidRgb('rgb(200,200,200,1)')).toBe(false)
+    expect(isValidRgb('rgb(1000,1000,1000)')).toBe(false)
   })
   it('returns false when given invalid rbga codes', () => {
-    expect(isRgbCode('rgba(w,w,w,w)')).toBe(false)
-    expect(isRgbCode('rgba(200,200,200)')).toBe(false)
-    expect(isRgbCode('rgba(200,200,200,2)')).toBe(false)
-    expect(isRgbCode('rgba(1000,1000,1000,2)')).toBe(false)
+    expect(isValidRgb('rgba(w,w,w,w)')).toBe(false)
+    expect(isValidRgb('rgba(200,200,200)')).toBe(false)
+    expect(isValidRgb('rgba(200,200,200,2)')).toBe(false)
+    expect(isValidRgb('rgba(1000,1000,1000,2)')).toBe(false)
   })
   it('returns true when given valid rbg codes', () => {
-    expect(isRgbCode('rgb(0,0,0)')).toBe(true)
-    expect(isRgbCode('rgb(10,50,80)')).toBe(true)
-    expect(isRgbCode('rgb(10, 50, 80)')).toBe(true)
-    expect(isRgbCode('rgb(255,255,255)')).toBe(true)
+    expect(isValidRgb('rgb(0,0,0)')).toBe(true)
+    expect(isValidRgb('rgb(10,50,80)')).toBe(true)
+    expect(isValidRgb('rgb(10, 50, 80)')).toBe(true)
+    expect(isValidRgb('rgb(255,255,255)')).toBe(true)
   })
   it('returns true when given valid rbga codes', () => {
-    expect(isRgbCode('rgba(0,0,0,0)')).toBe(true)
-    expect(isRgbCode('rgba(10,50,80,1)')).toBe(true)
-    expect(isRgbCode('rgba(10, 50, 80, 1)')).toBe(true)
-    expect(isRgbCode('rgba(255,255,255,0)')).toBe(true)
-    expect(isRgbCode('rgba(255,255,255,1)')).toBe(true)
-    expect(isRgbCode('rgba(255,255,255,0.2171)')).toBe(true)
+    expect(isValidRgb('rgba(0,0,0,0)')).toBe(true)
+    expect(isValidRgb('rgba(10,50,80,1)')).toBe(true)
+    expect(isValidRgb('rgba(10, 50, 80, 1)')).toBe(true)
+    expect(isValidRgb('rgba(255,255,255,0)')).toBe(true)
+    expect(isValidRgb('rgba(255,255,255,1)')).toBe(true)
+    expect(isValidRgb('rgba(255,255,255,0.2171)')).toBe(true)
   })
 })
 
