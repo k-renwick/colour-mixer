@@ -82,4 +82,22 @@ export function blend(firstColour, percentage = DEFAULT_PERCENTAGE, secondColour
   return asHex(...blendedRgb)
 }
 
-//TODO: add "lighten" and "darken" methods
+/**********************************************************************************************************************
+ * Takes a colour and lightens it by a percent
+ * @param {string} colour Any valid hex or rgb colour string
+ * @param {number} percentage Valid numbers are between 0 and 1
+ * @returns {string} Resulting lightened colour in hex format
+ */
+export function lighten(colour, percentage = DEFAULT_PERCENTAGE) {
+  return blend(colour, percentage, WHITE)
+}
+
+/**********************************************************************************************************************
+ * Takes a colour and darkens it by a percent
+ * @param {string} colour Any valid hex or rgb colour string
+ * @param {number} percentage Valid numbers are between 0 and 1
+ * @returns {string} Resulting darkened colour in hex format
+ */
+export function darken(colour, percentage = DEFAULT_PERCENTAGE) {
+  return blend(colour, percentage, BLACK)
+}
