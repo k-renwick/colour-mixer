@@ -2,7 +2,6 @@ import {
   isValidHex,
   isValidRgb,
   asHex,
-  asRgb,
   asRgbArray,
   blend,
 } from './Colour'
@@ -78,33 +77,22 @@ describe('asHex', () => {
   })
 })
 
-describe('asRgb', () => {
-  it('returns false when given invalid hex', () => {
-    expect(asRgb(false)).toBe(false)
-    expect(asRgb(undefined)).toBe(false)
-    expect(asRgb(1)).toBe(false)
-    expect(asRgb('_')).toBe(false)
-    expect(asRgb({ random: 'object' })).toBe(false)
-  })
-  it('returns rgb when given valid hex', () => {
-    expect(asRgb('#2566F2')).toStrictEqual([37, 102, 242])
-    expect(asRgb('2566F2')).toStrictEqual([37, 102, 242])
-    expect(asRgb('#2566F214')).toStrictEqual([37, 102, 242])
-  })
-})
-
 describe('asRgbArray', () => {
-  it('returns false when given invalid rbg code', () => {
+  it('returns false when given invalid colour code', () => {
     expect(asRgbArray(false)).toBe(false)
     expect(asRgbArray(undefined)).toBe(false)
     expect(asRgbArray(1)).toBe(false)
+    expect(asRgbArray('_')).toBe(false)
     expect(asRgbArray({ random: 'object' })).toBe(false)
   })
-  it('returns array when given valid rbg values', () => {
-    expect(asRgbArray('rgb(100,100,100)')).toStrictEqual(['100', '100', '100'])
-    expect(asRgbArray('rgb(0,0,0)')).toStrictEqual(['0', '0', '0'])
-    expect(asRgbArray('rgb(255,255,255)')).toStrictEqual(['255', '255', '255'])
-    expect(asRgbArray('rgba(255,255,255,0)')).toStrictEqual(['255', '255', '255'])
+  it('returns array when given valid colour code', () => {
+    expect(asRgbArray('rgb(100,100,100)')).toEqual([100, 100, 100])
+    expect(asRgbArray('rgb(0,0,0)')).toEqual([0, 0, 0])
+    expect(asRgbArray('rgb(255,255,255)')).toEqual([255, 255, 255])
+    expect(asRgbArray('rgba(255,255,255,0)')).toEqual([255, 255, 255])
+    expect(asRgbArray('#2566F2')).toEqual([37, 102, 242])
+    expect(asRgbArray('2566F2')).toEqual([37, 102, 242])
+    expect(asRgbArray('#2566F214')).toEqual([37, 102, 242])
   })
 })
 

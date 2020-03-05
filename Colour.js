@@ -32,24 +32,26 @@ export function asHex(r, g, b) {
 }
 
 /**********************************************************************************************************************
- * Converts an rgb string to an array of numbers
- * @param {string} rgb rgb string
- */
-export function asRgb(hex) {
-  if (!isHexCode(hex)) return false
-  hex = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => r + r + g + g + b + b)
-  const [colour, r, g, b] = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(hex)
-  return colour ? [parseInt(r, 16), parseInt(g, 16), parseInt(b, 16)] : false
-}
-
-/**********************************************************************************************************************
- * Converts an rgb string to an array of numbers
- * @param {string} rgb
+ * Converts colour string to a numeric rgb array
+ * @param {string} colour
  * @returns {Array.<number>} Numeric array of rgb values
  */
-export function asRgbArray(rgb) {
-  return isRgbCode(rgb) &&
-    rgb.replace(/^(rgb|rgba)\(/, '').replace(/\)$/, '').replace(/\s/g, '').split(',').slice(0, 3)
+export function asRgbArray(colour) {
+  // Handle rgb colour codes
+  if (isValidRgb(colour)) {
+    const [r, g, b] = colour.replace(/^(rgb|rgba)\(/, '').replace(/\)$/, '').replace(/\s/g, '').split(',').slice(0, 3)
+    return [parseInt(r), parseInt(g), parseInt(b)]
+  }
+
+  // Handle hex colour codes
+  if (isValidHex(colour)) {
+    colour = colour.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => r + r + g + g + b + b)
+    const [_, r, g, b] = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(colour)
+    return [parseInt(r, 16), parseInt(g, 16), parseInt(b, 16)]
+  }
+
+  // Handle invalid colour codes
+  return false
 }
 
 /**********************************************************************************************************************
