@@ -1,3 +1,7 @@
+const DEFAULT_PERCENTAGE = 0.5
+const BLACK = '#000'
+const WHITE = '#FFF'
+
 /**********************************************************************************************************************
  * Checks if string is a valid hex colour code
  * @param {string} colour
@@ -59,9 +63,9 @@ export function asRgbArray(colour) {
  * @param {string} firstColour Any valid hex or rgb colour string
  * @param {number} percentage Valid numbers are between 0 and 1
  * @param {string} secondColour Any valid hex or rgb colour string
- * @returns {string} Resulting blended colour
+ * @returns {string} Resulting blended colour in hex format
  */
-export function blend(firstColour, percentage = 0.16, secondColour = '#FFFFFF') {
+export function blend(firstColour, percentage = DEFAULT_PERCENTAGE, secondColour = WHITE) {
   // Ensure colours are valid codes and percentage is numeric
   if (
     !isValidHex(firstColour) && !isValidRgb(firstColour) ||

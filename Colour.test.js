@@ -6,8 +6,6 @@ import {
   blend,
 } from './Colour'
 
-//import * as colourMixer from './Colour'
-
 describe('isValidHex', () => {
   it('returns false when given a non-string', () => {
     expect(isValidHex(false)).toBe(false)
@@ -97,34 +95,34 @@ describe('asRgbArray', () => {
 })
 
 describe('blend', () => {
-  it('returns default when given invalid colour', () => {
+  it('returns false when given invalid colour or percentage', () => {
     expect(blend(false)).toBe(false)
     expect(blend(undefined)).toBe(false)
     expect(blend(1)).toBe(false)
     expect(blend('_')).toBe(false)
     expect(blend({ random: 'object' })).toBe(false)
+    expect(blend('#00ADD8', 'm')).toBe(false)
+    expect(blend('#00ADD8', { random: 'object' })).toBe(false)
   })
   it('returns hex when given valid rbg values', () => {
     expect(blend('rgba(255,255,255,0)')).toBe('#FFFFFF')
     expect(blend('rgb(255,255,255)')).toBe('#FFFFFF')
-    expect(blend('rgb(67,67,67)')).toBe('#E0E0E0')
+    expect(blend('rgb(67,67,67)')).toBe('#A1A1A1')
   })
   it('returns hex when given valid hex values', () => {
-    expect(blend('#00ADD8')).toBe('#D6F1F8')
-    expect(blend('#B57EE5')).toBe('#F3EAFA')
-    expect(blend('#B57EE514')).toBe('#F3EAFA')
-    expect(blend('B57EE5')).toBe('#F3EAFA')
+    expect(blend('#00ADD8')).toBe('#7FD6EB')
+    expect(blend('#B57EE5')).toBe('#DABEF2')
+    expect(blend('#B57EE514')).toBe('#DABEF2')
+    expect(blend('B57EE5')).toBe('#DABEF2')
   })
-  it('returns hex when given valid colour and opacity', () => {
+  it('returns hex when given valid colour and percentage', () => {
     expect(blend('#00ADD8', 1)).toBe('#00ADD8')
     expect(blend('#00ADD8', 0)).toBe('#FFFFFF')
     expect(blend('#00ADD8', 0.1)).toBe('#E5F6FB')
   })
-  it('returns hex when given colour and invalid opacity', () => {
+  it('returns hex when given colour and invalid percentage', () => {
     expect(blend('#00ADD8', 2)).toBe('#00ADD8')
-    expect(blend('#00ADD8', 'm')).toBe(false)
     expect(blend('#00ADD8', -12)).toBe('#FFFFFF')
-    expect(blend('#00ADD8', { random: 'object' })).toBe(false)
   })
   it('returns hex when given specified background colour', () => {
     expect(blend('#00ADD8', 0.5)).toBe('#7FD6EB')
