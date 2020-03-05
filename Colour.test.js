@@ -4,6 +4,8 @@ import {
   asHex,
   asRgbArray,
   blend,
+  darken,
+  lighten
 } from './Colour'
 
 describe('isValidHex', () => {
@@ -128,5 +130,69 @@ describe('blend', () => {
     expect(blend('#00ADD8', 0.5)).toBe('#7FD6EB')
     expect(blend('#00ADD8', 0.5, 'rgb(100,100,100)')).toBe('#32889E')
     expect(blend('#00ADD8', 0.5, 'rgb(200, 200, 200)')).toBe('#64BAD0')
+  })
+})
+
+describe('lighten', () => {
+  it('returns false when given invalid colour or percentage', () => {
+    expect(lighten(false)).toBe(false)
+    expect(lighten(undefined)).toBe(false)
+    expect(lighten(1)).toBe(false)
+    expect(lighten('_')).toBe(false)
+    expect(lighten({ random: 'object' })).toBe(false)
+    expect(lighten('#00ADD8', 'm')).toBe(false)
+    expect(lighten('#00ADD8', { random: 'object' })).toBe(false)
+  })
+  it('returns hex when given valid rbg values', () => {
+    expect(lighten('rgba(255,255,255,0)')).toBe('#FFFFFF')
+    expect(lighten('rgb(255,255,255)')).toBe('#FFFFFF')
+    expect(lighten('rgb(67,67,67)')).toBe('#A1A1A1')
+  })
+  it('returns hex when given valid hex values', () => {
+    expect(lighten('#00ADD8')).toBe('#7FD6EB')
+    expect(lighten('#B57EE5')).toBe('#DABEF2')
+    expect(lighten('#B57EE514')).toBe('#DABEF2')
+    expect(lighten('B57EE5')).toBe('#DABEF2')
+  })
+  it('returns hex when given valid colour and percentage', () => {
+    expect(lighten('#00ADD8', 1)).toBe('#00ADD8')
+    expect(lighten('#00ADD8', 0)).toBe('#FFFFFF')
+    expect(lighten('#00ADD8', 0.1)).toBe('#E5F6FB')
+  })
+  it('returns hex when given colour and out-of-range percentage', () => {
+    expect(lighten('#00ADD8', 2)).toBe('#00ADD8')
+    expect(lighten('#00ADD8', -12)).toBe('#FFFFFF')
+  })
+})
+
+describe('darken', () => {
+  it('returns false when given invalid colour or percentage', () => {
+    expect(darken(false)).toBe(false)
+    expect(darken(undefined)).toBe(false)
+    expect(darken(1)).toBe(false)
+    expect(darken('_')).toBe(false)
+    expect(darken({ random: 'object' })).toBe(false)
+    expect(darken('#00ADD8', 'm')).toBe(false)
+    expect(darken('#00ADD8', { random: 'object' })).toBe(false)
+  })
+  it('returns hex when given valid rbg values', () => {
+    expect(darken('rgba(255,255,255,0)')).toBe('#7F7F7F')
+    expect(darken('rgb(255,255,255)')).toBe('#7F7F7F')
+    expect(darken('rgb(100,100,100)')).toBe('#323232')
+  })
+  it('returns hex when given valid hex values', () => {
+    expect(darken('#00ADD8')).toBe('#00566C')
+    expect(darken('#B57EE5')).toBe('#5A3F72')
+    expect(darken('#B57EE514')).toBe('#5A3F72')
+    expect(darken('B57EE5')).toBe('#5A3F72')
+  })
+  it('returns hex when given valid colour and percentage', () => {
+    expect(darken('#00ADD8', 1)).toBe('#00ADD8')
+    expect(darken('#00ADD8', 0)).toBe('#000000')
+    expect(darken('#00ADD8', 0.3)).toBe('#003340')
+  })
+  it('returns hex when given colour and out-of-range percentage', () => {
+    expect(darken('#00ADD8', 2)).toBe('#00ADD8')
+    expect(darken('#00ADD8', -12)).toBe('#000000')
   })
 })
