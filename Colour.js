@@ -56,16 +56,25 @@ export function asRgbArray(colour) {
 
 /**********************************************************************************************************************
  * Blends two colours together
- * @param {string} colour original colour
- * @param {number} opacity valid numbers are between 0 and 1
- * @param {string} [background=white]
- * @returns {string} blended colour
+ * @param {string} firstColour Any valid hex or rgb colour string
+ * @param {number} percentage Valid numbers are between 0 and 1
+ * @param {string} secondColour Any valid hex or rgb colour string
+ * @returns {string} Resulting blended colour
  */
-export function blend(colour, opacity = 0.16, background = [255, 255, 255]) {
-  if (!isHexCode(colour) && !isRgbCode(colour)) return false
-  opacity = isNaN(opacity) ? 0.16 : opacity > 1 ? 1 : opacity < 0 ? 0 : opacity
-  colour = asRgb(colour) || asRgbArray(colour)
-  const blendedRgb = colour.map((colour, index) => opacity * colour + (1 - opacity) * background[index])
+export function blend(firstColour, percentage = 0.16, secondColour = '#FFFFFF') {
+  // Ensure colours are valid codes and percentage is numeric
+  if (
+    !isValidHex(firstColour) && !isValidRgb(firstColour) ||
+    !isValidHex(secondColour) && !isValidRgb(secondColour) ||
+    isNaN(percentage)
+  ) return false
+
+  firstColour = asRgbArray(firstColour)
+  secondColour = asRgbArray(secondColour)
+  percentage = percentage > 1 ? 1 : percentage < 0 ? 0 : percentage
+
+  const blendedRgb = firstColour.map((c, i) => percentage * c + (1 - percentage) * secondColour[i])
+
   return asHex(...blendedRgb)
 }
 

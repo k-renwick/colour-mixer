@@ -122,13 +122,13 @@ describe('blend', () => {
   })
   it('returns hex when given colour and invalid opacity', () => {
     expect(blend('#00ADD8', 2)).toBe('#00ADD8')
-    expect(blend('#00ADD8', 'm')).toBe('#D6F1F8')
+    expect(blend('#00ADD8', 'm')).toBe(false)
     expect(blend('#00ADD8', -12)).toBe('#FFFFFF')
-    expect(blend('#00ADD8', { random: 'object' })).toBe('#D6F1F8')
+    expect(blend('#00ADD8', { random: 'object' })).toBe(false)
   })
   it('returns hex when given specified background colour', () => {
     expect(blend('#00ADD8', 0.5)).toBe('#7FD6EB')
-    expect(blend('#00ADD8', 0.5, [100, 100, 100])).toBe('#32889E')
-    expect(blend('#00ADD8', 0.5, [200, 200, 200])).toBe('#64BAD0')
+    expect(blend('#00ADD8', 0.5, 'rgb(100,100,100)')).toBe('#32889E')
+    expect(blend('#00ADD8', 0.5, 'rgb(200, 200, 200)')).toBe('#64BAD0')
   })
 })
