@@ -1,6 +1,6 @@
 {
   "name": "@k-renwick/colour-mixer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A collection of methods to manipulate colours",
   "main": "Colour.js",
   "author": "Katrina Renwick",
