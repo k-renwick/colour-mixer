@@ -5,7 +5,7 @@ const WHITE = '#FFF'
 /**********************************************************************************************************************
  * Checks if string is a valid hex colour code
  * @param {string} colour
- * @returns {boolean} returns true is passed string is a valid hex colour code, false otherwise
+ * @returns {boolean} returns true if passed string is a valid hex colour code, false otherwise
  */
 export function isValidHex(colour = '') {
   return /^#?([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3,4})$/g.test(colour.toString())
